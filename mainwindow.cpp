@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->pinButton->setText("WPS PIN");
     ui->pushButton->setText("WPS Push");
-    ui->pinText->setText("PIN:");
     ui->statusMessage->setReadOnly(true);
     connect(ui->pinButton, SIGNAL(released()), this, SLOT(handlePinButton()));
     connect(ui->pushButton, SIGNAL(released()), this, SLOT(handlePushButton()));
@@ -20,14 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::handlePinButton()
 {
-    QString pin = ui->pinTextEdit->text();
     QString cmd = "WPS_PIN any";
     int ret;
     char resp[1024];
     QByteArray ba;
-
-    if (pin != "")
-        cmd = cmd + " " + pin;
 
     ba = cmd.toLatin1();
 
